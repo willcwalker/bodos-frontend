@@ -7,7 +7,7 @@ type Wait = { wait: number; lower: number; upper: number };
 async function fetchWait(tsIso: string): Promise<Wait> {
   const api = process.env.NEXT_PUBLIC_API_BASE!;
   const res = await fetch(`${api}/wait?timestamp=${encodeURIComponent(tsIso)}`);
-  if (!res.ok) throw new Error("API error");
+  //if (!res.ok) throw new Error("API error");
   return res.json();
 }
 
