@@ -25,11 +25,14 @@ export default function WaitTimeViewer() {
 
   // fetch “right now” once
   useEffect(() => {
-    fetchWait(new Date().toISOString())
-      .then(setNow)
-      .catch((e: unknown) => {
+    (async () => {
+      try {
+        const w = await fetchWait(new Date().toISOString());
+        setNow(w);
+      } catch (e: unknown) {
         console.error(e);
-      });
+      }
+    })();
   }, []);
 
   async function handleClick() {
