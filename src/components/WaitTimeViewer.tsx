@@ -5,11 +5,16 @@ import { useEffect, useState } from "react";
 type Wait = { wait: number; lower: number; upper: number };
 
 async function fetchWait(tsIso: string): Promise<Wait> {
-  const api = process.env.NEXT_PUBLIC_API_BASE!;
-  const res = await fetch(`${api}/wait?timestamp=${encodeURIComponent(tsIso)}`);
-  //if (!res.ok) throw new Error("API error");
-  return res.json();
-}
+    const api = process.env.NEXT_PUBLIC_API_BASE!;
+    const res = await fetch(
+      `${api}/wait?timestamp=${encodeURIComponent(tsIso)}`
+    );
+  
+    // pull the raw JSON (which is `any`) into a `data` variable,
+    // then assert it matches our `Wait` shape
+    const data = (await res.json()) as Wait;
+    return data;
+  }
 
 export default function WaitTimeViewer() {
   const [now, setNow] = useState<Wait | null>(null);
