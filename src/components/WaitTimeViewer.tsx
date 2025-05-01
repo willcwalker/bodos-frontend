@@ -30,8 +30,9 @@ export default function WaitTimeViewer() {
       setErr("");
       const w = await fetchWait(new Date(at).toISOString());
       setForecast(w);
-    } catch (e: any) {
-      setErr(e.message || "Unknown error");
+    } catch (e: unknown) {
+        const msg = e instanceof Error ? e.message : String(e);
+        setErr(msg || "Unknown error");
     } finally {
       setBusy(false);
     }
