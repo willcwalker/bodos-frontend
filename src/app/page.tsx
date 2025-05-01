@@ -1,4 +1,4 @@
-import WaitTimeViewer from "@/components/WaitTimeViewer";
+import WaitTimeViewer from "../components/WaitTimeViewer";
 
 export default function Page() {
   return <WaitTimeViewer />;
